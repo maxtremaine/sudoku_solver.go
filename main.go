@@ -3,7 +3,6 @@ package main
 import (
 	"os"
 	"log"
-	"fmt"
 )
 
 func main() {
@@ -12,5 +11,5 @@ func main() {
 		log.Fatal(err)
 	}
 	startPuzzle := string(data)
-	fmt.Println(startPuzzle)
+	log.Println(startPuzzle)
 }
