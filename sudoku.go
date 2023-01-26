@@ -1,15 +1,5 @@
 package main
 
-type sudoku struct {
-	cells [81]uint8
-}
-
-func (puzzle sudoku) isValid() bool {
-	
-
-	return len(groups) == 81
-}
-
 var groups = [27][9]int{
 	// Rows
 	{ 0, 1, 2, 3, 4, 5, 6, 7, 8 },
@@ -41,4 +31,14 @@ var groups = [27][9]int{
 	{ 54, 55, 56, 63, 64, 65, 72, 73, 74 },
 	{ 57, 58, 59, 66, 67, 68, 75, 76, 77 },
 	{ 60, 61, 62, 69, 70, 71, 78, 79, 80 },
+}
+
+type sudoku struct {
+	cells [81]uint8
+}
+
+func (puzzle sudoku) isValid() bool {
+	
+
+	return len(groups) == 81
 }
