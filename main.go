@@ -1,7 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"os"
+	"log"
+	"fmt"
+)
 
 func main() {
-	fmt.Println("Oh hi there.")
+	data, err := os.ReadFile("io/start.sudoku")
+	if err != nil {
+		log.Fatal(err)
+	}
+	startPuzzle := string(data)
+	fmt.Println(startPuzzle)
 }
