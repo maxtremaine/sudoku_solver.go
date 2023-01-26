@@ -38,7 +38,14 @@ type sudoku struct {
 }
 
 func (puzzle sudoku) isValid() bool {
-	
+
+	for group := range groups {
+		var groupCells [9]int
+
+		for cellIndex := range group {
+
+		}
+	}
 
 	return len(groups) == 81
 }
