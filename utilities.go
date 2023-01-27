@@ -8,7 +8,10 @@ func lastIndex(arr []int, item int) int {
 			return i
 		}
 	}
-	return 0
+	if arr[0] == item {
+		return 0
+	}
+	return -1
 }
 
 func hasDuplicates(arr []int) bool {

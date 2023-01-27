@@ -10,6 +10,10 @@ func TestLastIndex(t *testing.T) {
 	if indexIsFive != 5 {
 		t.Errorf("lastIndex Expected 5, received %d.", indexIsFive)
 	}
+	indexNeg := lastIndex([]int{ 1, 2, 3 }, 5)
+	if indexNeg != -1 {
+		t.Errorf("lastIndex expected -1, received %d.", indexNeg)
+	}
 }
 
 func TestHasDuplicates(t *testing.T) {
