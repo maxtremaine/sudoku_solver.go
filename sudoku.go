@@ -1,6 +1,6 @@
 package main
 
-var groups = [27][9]int{
+var groups = [27][9]uint8{
 	// Rows
 	{ 0, 1, 2, 3, 4, 5, 6, 7, 8 },
 	{ 9, 10, 11, 12, 13, 14, 15, 16, 17 },
@@ -36,14 +36,18 @@ var groups = [27][9]int{
 type sudoku [81]uint8
 
 func (puzzle sudoku) isValid() bool {
+	for _, group := range groups {
+		var groupValues []uint8
+		for _, cellIndex := range group {
+			cellValue := puzzle[cellIndex]
+			if cellValue != 0 {
+				groupValues = append(groupValues, cellValue)
+			}
+		}
+		if hasDuplicates(groupValues) {
+			return false
+		}
+	}
 
-	// for group := range groups {
-	// 	var groupCells [9]int
-
-	// 	for cellIndex := range group {
-
-	// 	}
-	// }
-
-	return len(groups) == 81
+	return true
 }
