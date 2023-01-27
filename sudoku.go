@@ -33,9 +33,7 @@ var groups = [27][9]int{
 	{ 60, 61, 62, 69, 70, 71, 78, 79, 80 },
 }
 
-type sudoku struct {
-	cells [81]uint8
-}
+type sudoku [81]uint8
 
 func (puzzle sudoku) isValid() bool {
 
