@@ -46,7 +46,7 @@ var fileToStringConversionIndexes = []int{16, 17, 18, 20, 21, 22, 24, 25, 26, 30
 
 type sudoku [81]int
 
-func sudokuFromString(s string) (sudoku, error) {
+func String(s string) (sudoku, error) {
 	var output sudoku
 	for outputIndex, stringIndex := range fileToStringConversionIndexes {
 		cellValue := string(s[stringIndex])

@@ -11,6 +11,6 @@ func main() {
 		log.Fatal(err)
 	}
 	startPuzzle := string(data)
-	startSudoku, err := sudokuFromString(startPuzzle)
+	startSudoku, err := String(startPuzzle)
 	log.Println(startSudoku.getRelatedCells(1))
 }

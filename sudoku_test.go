@@ -22,13 +22,13 @@ var validPuzzle = sudoku{7, 0, 0, 0, 4, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0
 	9, 0, 8, 0, 0, 0, 3, 5, 0, 4, 9, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 2, 1, 0, 8, 5, 0,
 	0, 0, 1, 0, 9, 0, 6, 0, 7, 0, 0, 0, 8, 0, 0, 0, 4, 0, 0, 6, 0, 0, 0, 2, 0, 0, 0, 8}
 
-func TestSudokuFromString(t *testing.T) {
-	validSudoku, err := sudokuFromString(validFile)
+func TestString(t *testing.T) {
+	validSudoku, err := String(validFile)
 	if err != nil {
-		t.Error("File was valid, sudokuFromString returned error.")
+		t.Error("File was valid, String returned error.")
 	}
 	if validSudoku != validPuzzle {
-		t.Errorf("sudokuFromString expected %d, received %d.", validPuzzle, validSudoku)
+		t.Errorf("String expected %d, received %d.", validPuzzle, validSudoku)
 	}
 }
 
