@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"testing"
+	"reflect"
+)
 
 var validFile = `  abc def ghi
 1 7__|_4_|__1
@@ -15,12 +18,14 @@ var validFile = `  abc def ghi
 8 __8|___|4__
 9 6__|_2_|__8`
 
+var validSudoku, err = sudokuFromString(validFile)
+
 var validPuzzle = sudoku{ 7, 0, 0, 0, 4, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 6, 0, 2, 0,
 	9, 0, 8, 0, 0, 0, 3, 5, 0, 4, 9, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 2, 1, 0, 8, 5, 0,
 	0, 0, 1, 0, 9, 0, 6, 0, 7, 0, 0, 0, 8, 0, 0, 0, 4, 0, 0, 6, 0, 0, 0, 2, 0, 0, 0, 8 }
 
 func TestSudokuFromString(t *testing.T) {
-	validSudoku, err := sudokuFromString(validFile)
+	
 	if err != nil {
 		t.Error("File was valid, sudokuFromString returned error.")
 	}
@@ -42,5 +47,13 @@ func TestIsValid(t *testing.T) {
 	output = invalidPuzzle.isValid()
 	if output != false {
 		t.Error("isValid() expected false.")
+	}
+}
+
+func TestGetRelatedCells(t *testing.T) {
+	relatedToValid := validSudoku.getRelatedCells(1)
+	relatedToOne := []int{ 1, 4, 6, 7 }
+	if !reflect.DeepEqual(relatedToValid, relatedToOne) {
+		t.Errorf("getRelatedCells expected %d, got %d.", relatedToOne, relatedToValid)
 	}
 }

@@ -1,8 +1,11 @@
 package main
 
-import "strconv"
+import (
+	"strconv"
+	"sort"
+)
 
-var groups = [27][9]int{
+var groups = [][]int{
 	// Rows
 	{ 0, 1, 2, 3, 4, 5, 6, 7, 8 },
 	{ 9, 10, 11, 12, 13, 14, 15, 16, 17 },
@@ -73,4 +76,26 @@ func (puzzle sudoku) isValid() bool {
 	}
 
 	return true
+}
+
+func (puzzle sudoku) getRelatedCells(refIndex int) []int {
+	var relatedIndexes []int
+	for _, group := range groups {
+		for _, i := range group {
+			if i == refIndex {
+				relatedIndexes = append(relatedIndexes, group...)
+			}
+		}
+	}
+	relatedIndexes = uniqueNumbers(relatedIndexes)
+	var relatedValues []int
+	for _, i := range relatedIndexes {
+		value := puzzle[i]
+		if value != 0 {
+			relatedValues = append(relatedValues, value)
+		}
+	}
+	relatedValues = uniqueNumbers(relatedValues)
+	sort.Ints(relatedValues)
+	return relatedValues
 }
