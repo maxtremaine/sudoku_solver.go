@@ -2,7 +2,7 @@ package main
 
 import "strconv"
 
-var groups = [27][9]uint8{
+var groups = [27][9]int{
 	// Rows
 	{ 0, 1, 2, 3, 4, 5, 6, 7, 8 },
 	{ 9, 10, 11, 12, 13, 14, 15, 16, 17 },
@@ -41,7 +41,7 @@ var fileToStringConversionIndexes = []int{ 16, 17, 18, 20, 21, 22, 24, 25, 26, 3
 	132, 133, 134, 136, 137, 138, 142, 143, 144, 146, 147, 148, 150, 151, 152, 156, 157, 158, 160,
 	161, 162, 164, 165, 166 }
 
-type sudoku [81]uint8
+type sudoku [81]int
 
 func sudokuFromString(s string) (sudoku, error) {
 	var output sudoku
@@ -52,8 +52,7 @@ func sudokuFromString(s string) (sudoku, error) {
 			if err != nil {
 				return sudoku{}, err
 			}
-			uint8Value := uint8(intValue)
-			output[outputIndex] = uint8Value
+			output[outputIndex] = intValue
 		}
 	}
 	return output, nil
@@ -61,7 +60,7 @@ func sudokuFromString(s string) (sudoku, error) {
 
 func (puzzle sudoku) isValid() bool {
 	for _, group := range groups {
-		var groupValues []uint8
+		var groupValues []int
 		for _, cellIndex := range group {
 			cellValue := puzzle[cellIndex]
 			if cellValue != 0 {
