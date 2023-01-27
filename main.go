@@ -12,5 +12,8 @@ func main() {
 	}
 	startPuzzle := string(data)
 	startSudoku, err := String(startPuzzle)
+	if err != nil {
+		log.Fatal(err)
+	}
 	log.Println(startSudoku.getRelatedCells(1))
 }
