@@ -1,5 +1,7 @@
 package main
 
+import "strconv"
+
 var groups = [27][9]uint8{
 	// Rows
 	{ 0, 1, 2, 3, 4, 5, 6, 7, 8 },
@@ -33,7 +35,29 @@ var groups = [27][9]uint8{
 	{ 60, 61, 62, 69, 70, 71, 78, 79, 80 },
 }
 
+var fileToStringConversionIndexes = []int{ 16, 17, 18, 20, 21, 22, 24, 25, 26, 30, 31, 32, 34, 35,
+	36, 38, 39, 40, 44, 45, 46, 48, 49, 50, 52, 53, 54, 72, 73, 74, 76, 77, 78, 80, 81, 82, 86,
+	87, 88, 90, 91, 92, 94, 95, 96, 100, 101, 102, 104, 105, 106, 108, 109, 110, 128, 129, 130,
+	132, 133, 134, 136, 137, 138, 142, 143, 144, 146, 147, 148, 150, 151, 152, 156, 157, 158, 160,
+	161, 162, 164, 165, 166 }
+
 type sudoku [81]uint8
+
+func sudokuFromString(s string) (sudoku, error) {
+	var output sudoku
+	for outputIndex, stringIndex := range fileToStringConversionIndexes {
+		cellValue := string(s[stringIndex])
+		if cellValue != "_" {
+			intValue, err := strconv.Atoi(cellValue)
+			if err != nil {
+				return sudoku{}, err
+			}
+			uint8Value := uint8(intValue)
+			output[outputIndex] = uint8Value
+		}
+	}
+	return output, nil
+}
 
 func (puzzle sudoku) isValid() bool {
 	for _, group := range groups {

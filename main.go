@@ -11,5 +11,5 @@ func main() {
 		log.Fatal(err)
 	}
 	startPuzzle := string(data)
-	log.Println(startPuzzle)
+	log.Println(sudokuFromString(startPuzzle))
 }
