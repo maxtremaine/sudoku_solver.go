@@ -14,17 +14,32 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	startPuzzle := string(data)
-	startSudoku, err := String(startPuzzle)
+	startString := string(data)
+	startPuzzle, err := String(startString)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if !startSudoku.isValid() {
+	if !startPuzzle.isValid() {
 		log.Fatal("The starting puzzle is not valid.")
 	}
 	// Run the branching and elmination process
-	//var workingBranches []sudoku
-	
+	startingBlankCells := startPuzzle.getBlankCells()
+	workingBranches := []sudoku{startPuzzle}
+	for runIndex, _ := range startingBlankCells {
+		runNumber := runIndex + 1
+		var newBranches []sudoku
+		for _, branch := range workingBranches {
+			blankCells := branch.getBlankCells()
+			lowestDFCell := blankCells[0]
+			for _, possibleValue := range lowestDFCell.possibleValues {
+				newBranch := branch.changeCell(lowestDFCell.index, possibleValue)
+				newBranches = append(newBranches, newBranch)
+			}
+		}
+		workingBranches = newBranches
+		log.Printf("Completed run %d with %d branches.", runNumber, len(newBranches))
+	}
+	log.Println(workingBranches)
 	// Close timing
 	elapsedNS := time.Since(t0)
 	elapsedMS := float64(elapsedNS) * 0.000001
