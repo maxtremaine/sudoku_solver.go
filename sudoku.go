@@ -116,5 +116,8 @@ func (puzzle sudoku) getBlankCells() []blankCell {
 			blankCells = append(blankCells, newBlankCell)
 		}
 	}
+	sort.Slice(blankCells, func(i, j int) bool {
+		return len(blankCells[i].possibleValues) < len(blankCells[j].possibleValues)
+	})
 	return blankCells
 }
