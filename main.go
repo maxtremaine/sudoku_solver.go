@@ -39,7 +39,12 @@ func main() {
 		workingBranches = newBranches
 		log.Printf("Completed run %d with %d branches.", runNumber, len(newBranches))
 	}
-	log.Println(workingBranches)
+	// Output
+	solvedFile := workingBranches[0].toSudokuFile()
+	err = os.WriteFile("io/finish.sudoku", []byte(solvedFile), 0666)
+	if err != nil {
+		log.Fatal(err)
+	}
 	// Close timing
 	elapsedNS := time.Since(t0)
 	elapsedMS := float64(elapsedNS) * 0.000001

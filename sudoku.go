@@ -3,6 +3,7 @@ package main
 import (
 	"sort"
 	"strconv"
+	"strings"
 )
 
 var groups = [][]int{
@@ -123,7 +124,7 @@ func (puzzle sudoku) getBlankCells() []blankCell {
 }
 
 func (puzzle sudoku) toSudokuFile() string {
-	output := []byte{" ", " ", "a", "b", "c", " ", "d", "e", "f", " ", "g", "h", "i", "\n",
+	output := []string{" ", " ", "a", "b", "c", " ", "d", "e", "f", " ", "g", "h", "i", "\n",
 		"1", " ", "_", "_", "_", "|", "_", "_", "_", "|", "_", "_", "_", "\n", "2", " ", "_", "_",
 		"_", "|", "_", "_", "_", "|", "_", "_", "_", "\n", "3", " ", "_", "_", "_", "|", "_", "_",
 		"_", "|", "_", "_", "_", "\n", " ", " ", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",
@@ -135,7 +136,12 @@ func (puzzle sudoku) toSudokuFile() string {
 		"_", "|", "_", "_", "_", "|", "_", "_", "_"}
 
 	for puzzleIndex, fileIndex := range fileToStringConversionIndexes {
-		output[fileIndex] = puzzle[puzzleIndex]
+		stringValue := strconv.Itoa(puzzle[puzzleIndex])
+		if stringValue == "0" {
+			output[fileIndex] = "_"
+		} else {
+			output[fileIndex] = stringValue
+		}
 	}
-	return output
+	return strings.Join(output, "")
 }

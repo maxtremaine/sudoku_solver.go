@@ -91,5 +91,8 @@ func TestGetBlankCells(t *testing.T) {
 }
 
 func TestToSudokuFile(t *testing.T) {
-	
+	testOutput := validPuzzle.toSudokuFile()
+	if validFile != testOutput {
+		t.Errorf("toSudokuFile expected %s, got %s.", validFile, testOutput)
+	}
 }
