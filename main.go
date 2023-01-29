@@ -17,6 +17,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	if !startSudoku.isValid() {
+		log.Fatal("The starting puzzle is not valid.")
+	}
 	log.Println(startSudoku.getRelatedCells(1))
 	elapsedNS := time.Since(t0)
 	elapsedMS := float64(elapsedNS) * 0.000001
