@@ -15,7 +15,7 @@ func main() {
 		log.Fatal(err)
 	}
 	startString := string(data)
-	startPuzzle, err := String(startString)
+	startPuzzle, err := SudokuFile(startString)
 	if err != nil {
 		log.Fatal(err)
 	}

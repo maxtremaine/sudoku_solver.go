@@ -22,13 +22,13 @@ var validPuzzle = sudoku{7, 0, 0, 0, 4, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0
 	9, 0, 8, 0, 0, 0, 3, 5, 0, 4, 9, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 2, 1, 0, 8, 5, 0,
 	0, 0, 1, 0, 9, 0, 6, 0, 7, 0, 0, 0, 8, 0, 0, 0, 4, 0, 0, 6, 0, 0, 0, 2, 0, 0, 0, 8}
 
-func TestString(t *testing.T) {
-	validSudoku, err := String(validFile)
+func TestSudokuFile(t *testing.T) {
+	validSudoku, err := SudokuFile(validFile)
 	if err != nil {
-		t.Error("File was valid, String returned error.")
+		t.Error("File was valid, SudokuFile returned error.")
 	}
 	if validSudoku != validPuzzle {
-		t.Errorf("String expected %d, received %d.", validPuzzle, validSudoku)
+		t.Errorf("SudokuFile expected %d, received %d.", validPuzzle, validSudoku)
 	}
 }
 
@@ -82,10 +82,14 @@ func TestGetBlankCells(t *testing.T) {
 7 247|593|168
 8 861|742|395
 9 953|618|472`
-	missingOnePuzzle, _ := String(missingOne)
+	missingOnePuzzle, _ := SudokuFile(missingOne)
 	testBlankCells := missingOnePuzzle.getBlankCells()
 	expectedOutput := []blankCell{blankCell{1, []int{1}}}
 	if !reflect.DeepEqual(expectedOutput, testBlankCells) {
 		t.Errorf("getBlankCells expected %d, got %d.", expectedOutput, testBlankCells)
 	}
+}
+
+func TestToSudokuFile(t *testing.T) {
+	
 }

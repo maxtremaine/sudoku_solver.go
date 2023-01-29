@@ -46,7 +46,7 @@ var fileToStringConversionIndexes = []int{16, 17, 18, 20, 21, 22, 24, 25, 26, 30
 
 type sudoku [81]int
 
-func String(s string) (sudoku, error) {
+func SudokuFile(s string) (sudoku, error) {
 	var output sudoku
 	for outputIndex, stringIndex := range fileToStringConversionIndexes {
 		cellValue := string(s[stringIndex])
@@ -120,4 +120,22 @@ func (puzzle sudoku) getBlankCells() []blankCell {
 		return len(blankCells[i].possibleValues) < len(blankCells[j].possibleValues)
 	})
 	return blankCells
+}
+
+func (puzzle sudoku) toSudokuFile() string {
+	output := []byte{" ", " ", "a", "b", "c", " ", "d", "e", "f", " ", "g", "h", "i", "\n",
+		"1", " ", "_", "_", "_", "|", "_", "_", "_", "|", "_", "_", "_", "\n", "2", " ", "_", "_",
+		"_", "|", "_", "_", "_", "|", "_", "_", "_", "\n", "3", " ", "_", "_", "_", "|", "_", "_",
+		"_", "|", "_", "_", "_", "\n", " ", " ", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",
+		"-", "\n", "4", " ", "_", "_", "_", "|", "_", "_", "_", "|", "_", "_", "_", "\n", "5", " ",
+		"_", "_", "_", "|", "_", "_", "_", "|", "_", "_", "_", "\n", "6", " ", "_", "_", "_", "|",
+		"_", "_", "_", "|", "_", "_", "_", "\n", " ", " ", "-", "-", "-", "-", "-", "-", "-", "-",
+		"-", "-", "-", "\n", "7", " ", "_", "_", "_", "|", "_", "_", "_", "|", "_", "_", "_", "\n",
+		"8", " ", "_", "_", "_", "|", "_", "_", "_", "|", "_", "_", "_", "\n", "9", " ", "_", "_",
+		"_", "|", "_", "_", "_", "|", "_", "_", "_"}
+
+	for puzzleIndex, fileIndex := range fileToStringConversionIndexes {
+		output[fileIndex] = puzzle[puzzleIndex]
+	}
+	return output
 }
