@@ -99,3 +99,9 @@ func (puzzle sudoku) getRelatedCells(refIndex int) []int {
 	sort.Ints(relatedValues)
 	return relatedValues
 }
+
+func (puzzle sudoku) changeCell(index int, value int) sudoku {
+	var newPuzzle = puzzle
+	newPuzzle[index] = value
+	return newPuzzle
+}

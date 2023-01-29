@@ -55,3 +55,16 @@ func TestGetRelatedCells(t *testing.T) {
 		t.Errorf("getRelatedCells expected %d, got %d.", relatedToOne, relatedToValid)
 	}
 }
+
+func TestChangeCell(t *testing.T) {
+	puzzleWithChange := sudoku{7, 1, 0, 0, 4, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 6, 0, 2, 0,
+		9, 0, 8, 0, 0, 0, 3, 5, 0, 4, 9, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 2, 1, 0, 8, 5, 0,
+		0, 0, 1, 0, 9, 0, 6, 0, 7, 0, 0, 0, 8, 0, 0, 0, 4, 0, 0, 6, 0, 0, 0, 2, 0, 0, 0, 8}
+	newPuzzle := validPuzzle.changeCell(1, 1)
+	if puzzleWithChange != newPuzzle {
+		t.Errorf("changeCell expected %d, got %d.", puzzleWithChange, newPuzzle)
+	}
+	if validPuzzle == newPuzzle {
+		t.Error("changeCell changed the original puzzle in place.")
+	}
+}
