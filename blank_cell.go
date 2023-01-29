@@ -1,6 +1,6 @@
 package main
 
 type blankCell struct {
-	index int
+	index          int
 	possibleValues []int
 }
