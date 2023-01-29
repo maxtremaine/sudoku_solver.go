@@ -37,3 +37,12 @@ func TestUniqueNumbers(t *testing.T) {
 		t.Errorf("uniqueNumbers expected %d, received %d.", outputList, uniqueOutput)
 	}
 }
+
+func TestGetMissingDigits(t *testing.T) {
+	testList := []int {1, 2, 3, 4}
+	testOutput := []int {5, 6, 7, 8, 9}
+	newList := getMissingDigits(testList)
+	if !reflect.DeepEqual(testOutput, newList) {
+		t.Errorf("getMissingDigits expected %d, received %d.", testOutput, newList)
+	}
+}

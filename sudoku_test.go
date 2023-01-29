@@ -68,3 +68,24 @@ func TestChangeCell(t *testing.T) {
 		t.Error("changeCell changed the original puzzle in place.")
 	}
 }
+
+func TestGetBlankCells(t *testing.T) {
+	missingOne := `  abc def ghi
+1 7_2|954|836
+2 539|186|247
+3 684|237|519
+  -----------
+4 325|479|681
+5 198|365|724
+6 476|821|953
+  -----------
+7 247|593|168
+8 861|742|395
+9 953|618|472`
+	missingOnePuzzle, _ := String(missingOne)
+	testBlankCells := missingOnePuzzle.getBlankCells()
+	expectedOutput := []blankCell{blankCell{1, []int{1}}}
+	if !reflect.DeepEqual(expectedOutput, testBlankCells) {
+		t.Errorf("getBlankCells expected %d, got %d.", expectedOutput, testBlankCells)
+	}
+}

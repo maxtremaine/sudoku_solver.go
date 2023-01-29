@@ -34,3 +34,19 @@ func uniqueNumbers(arr []int) []int {
 	sort.Ints(output)
 	return output
 }
+
+func getMissingDigits(arr []int) []int {
+	var output []int
+	for i := 1; i < 10; i++ {
+		found := false
+		for _, number := range arr {
+			if number == i {
+				found = true
+			}
+		}
+		if !found {
+			output = append(output, i)
+		}
+	}
+	return output
+}

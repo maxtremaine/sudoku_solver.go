@@ -105,3 +105,16 @@ func (puzzle sudoku) changeCell(index int, value int) sudoku {
 	newPuzzle[index] = value
 	return newPuzzle
 }
+
+func (puzzle sudoku) getBlankCells() []blankCell {
+	var blankCells []blankCell
+	for i, cell := range puzzle {
+		if cell == 0 {
+			relatedCells := puzzle.getRelatedCells(i)
+			possibleValues := getMissingDigits(relatedCells)
+			newBlankCell := blankCell{i, possibleValues}
+			blankCells = append(blankCells, newBlankCell)
+		}
+	}
+	return blankCells
+}
